@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SSOServer.Data.Models;
+using SSOServer.Services;
 
 namespace SSOServer
 {
@@ -41,6 +42,8 @@ namespace SSOServer
                 .AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<SignInManager<ApplicationUser>, CustomSignInManager>();
 
             var builder = services.AddIdentityServer(options =>
             {
